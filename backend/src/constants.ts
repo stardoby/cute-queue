@@ -1,0 +1,79 @@
+export type ROLE = "STUDENT" | "HELPER" | "ADMIN"
+
+export type DAY_OF_WEEK = "MONDAY" | "TUESDAY" | "WEDNESDAY" | "THURSDAY" | "FRIDAY" | "SATURDAY" | "SUNDAY";
+
+export type QUESTION_TYPE = "debugging" | "conceptual";
+
+export type REQUEST_STATUS = "PENDING" | "POSTPONED" | "SERVING" | "CLOSED" | "CREATED" | "IN_REVIEW" | "NEEDS_UPDATE" | "UPDATED" | "RESOLVED" | "LEFT";
+
+export const ROLES: Record<ROLE, ROLE> =  {
+    STUDENT: "STUDENT",
+    HELPER: "HELPER",
+    ADMIN: "ADMIN",
+};
+
+export const DAYS_OF_WEEK: Record<DAY_OF_WEEK, DAY_OF_WEEK> = {
+    MONDAY: "MONDAY",
+    TUESDAY: "TUESDAY",
+    WEDNESDAY: "WEDNESDAY",
+    THURSDAY: "THURSDAY",
+    FRIDAY: "FRIDAY",
+    SATURDAY: "SATURDAY",
+    SUNDAY: "SUNDAY"
+}
+
+export const QUESTION_TYPES: Record<QUESTION_TYPE, QUESTION_TYPE> = {
+    debugging: "debugging",
+    conceptual: "conceptual",
+}
+
+export const REQUEST_STATUSES: Record<REQUEST_STATUS, REQUEST_STATUS> = {
+    PENDING: "PENDING",
+    POSTPONED: "POSTPONED",
+    IN_REVIEW: "IN_REVIEW",
+    NEEDS_UPDATE: "NEEDS_UPDATE",
+    UPDATED: "UPDATED",
+    SERVING: "SERVING",
+    RESOLVED: "RESOLVED",
+    CLOSED: "CLOSED",
+    CREATED: "CREATED",
+    LEFT: "LEFT"
+}
+
+export const VALID_TRANSITIONS = {
+    [ROLES.STUDENT]: {
+        [REQUEST_STATUSES.CREATED]: [
+            REQUEST_STATUSES.PENDING,
+        ],
+        [REQUEST_STATUSES.PENDING]: [
+            REQUEST_STATUSES.CLOSED,
+        ],
+        [REQUEST_STATUSES.NEEDS_UPDATE]: [
+            REQUEST_STATUSES.UPDATED,
+            REQUEST_STATUSES.PENDING,
+        ],
+        [REQUEST_STATUSES.RESOLVED]: [
+            REQUEST_STATUSES.CLOSED,
+        ],
+        [REQUEST_STATUSES.LEFT]: [
+            REQUEST_STATUSES.CLOSED,
+            REQUEST_STATUSES.PENDING,
+        ]
+    },
+    [ROLES.HELPER]: {
+        [REQUEST_STATUSES.PENDING]: [
+            REQUEST_STATUSES.IN_REVIEW,
+        ],
+        [REQUEST_STATUSES.IN_REVIEW]: [
+            REQUEST_STATUSES.SERVING,
+            REQUEST_STATUSES.NEEDS_UPDATE,
+        ],
+        [REQUEST_STATUSES.UPDATED]: [
+            REQUEST_STATUSES.IN_REVIEW,
+        ],
+        [REQUEST_STATUSES.SERVING]: [
+            REQUEST_STATUSES.RESOLVED,
+            REQUEST_STATUSES.LEFT,
+        ]
+    },
+}

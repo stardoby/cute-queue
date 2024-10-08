@@ -1,0 +1,39 @@
+{
+  "name": "@cutequeue/backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node build/app.js",
+    "dev": "nodemon src/app.ts",
+    "build": "tsc",
+    "local-db:create": "ts-node scripts/local-db-create.ts",
+    "local-db:destroy": "ts-node scripts/local-db-destroy.ts"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.329.0",
+    "@aws-sdk/lib-dynamodb": "^3.329.0",
+    "aws-jwt-verify": "^4.0.0",
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "date-fns": "^2.30.0",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "fp-ts": "^2.15.0",
+    "io-ts": "^2.2.20",
+    "socket.io": "^4.6.1",
+    "ulid": "^2.3.0"
+  },
+  "devDependencies": {
+    "@tsconfig/node18": "^2.0.0",
+    "@types/body-parser": "^1.19.2",
+    "@types/cors": "^2.8.13",
+    "@types/express": "^4.17.17",
+    "nodemon": "^2.0.22",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.0.4"
+  }
+}
